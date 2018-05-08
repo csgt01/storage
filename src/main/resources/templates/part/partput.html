@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="layouts/default">
+<head>
+    <title>Warenverwaltung</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div>
+        <form action="#" th:action="@{'/part/' + ${part.id}}" th:object="${part}" method="post">
+            <fieldset>
+                <legend>Neuer Part</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                    <label for="name" class="col-lg-2 control-label">Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="name" placeholder="Name eingeben" th:field="*{name}" />
+                        <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Fehler</span>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button type="submit" name="update" th:text="Save">Update</button>
+                </div>
+                <input th:type="hidden" th:field="*{id}">
+
+                <input name="_method" type="hidden" value="PUT" />
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

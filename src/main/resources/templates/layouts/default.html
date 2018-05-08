@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap-grid.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap-reboot.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/datatables/select.bootstrap4.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/chosen/chosen.min.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/iconic/css/open-iconic-bootstrap.css}" >
+    <link rel="stylesheet" th:href="@{/custom.css}" >
+</head>
+
+<body>
+
+<!-- SHOW NAVIGATION BAR -->
+
+<div th:replace="fragments/menu_main :: menu_main">Main menu</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    <div class="row mt-4">
+
+        <div class="col-12">
+
+            <!-- FLASH MESSAGES -->
+
+            <div th:if="${errorMessage} != null" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span th:text="${errorMessage}">success-message</span>
+            </div>
+
+            <div th:if="${successMessage} != null" class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span th:text="${successMessage}">success-message</span>
+            </div>
+
+            <!-- PAGE CONTENT -->
+
+            <div layout:fragment="content" th:remove="tag">Will be replaced by actual content.</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}" ></script>
+<script th:src="@{/vendor/uri/uri.js}" ></script>
+<script th:src="@{/vendor/popper/umd/popper.min.js}" ></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}" ></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}" ></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}" ></script>
+<script th:src="@{/vendor/datatables/dataTables.select.min.js}" ></script>
+<script th:src="@{/vendor/chosen/chosen.jquery.min.js}" ></script>
+<script th:src="@{/custom.js}" ></script>
+</body>
+
+</html>

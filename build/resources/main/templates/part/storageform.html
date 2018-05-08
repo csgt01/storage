@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="layouts/default">
+<head>
+    <title>Warenverwaltung</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div>
+        <form action="#" th:action="@{'/part/' + ${storage.part.id} + '/storage/'}" th:object="${storage}" method="post">
+            <fieldset>
+                <legend>Neuer Storage</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
+                    <label for="price" class="col-lg-2 control-label">Price</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="price" placeholder="Preis eingeben" th:field="*{price}" />
+                        <span class="help-block" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Fehler</span>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button type="submit" name="save" th:text="Save">Save</button>
+                </div>
+                <input th:type="hidden" th:field="*{part.id}">
+                <input name="_method" type="hidden" value="POST" />
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

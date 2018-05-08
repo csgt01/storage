@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="layouts/default">
+<head>
+    <title>Warenverwaltung</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <h2>Einkauf erstellen</h2>
+    <div>
+        <form action="#" th:action="@{'/bill/' + ${id}}" th:object="${bill}" method="post">
+            <fieldset>
+                <div class="form-group" th:classappend="${#fields.hasErrors('shop')}? 'has-error'">
+                    <label for="shop" class="col-lg-2 control-label">shop</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="shop" placeholder="shop eingeben" th:field="*{shop}" />
+                        <span class="help-block" th:if="${#fields.hasErrors('shop')}" th:errors="*{shop}">Fehler</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Artikel:</label>
+                    <div class="col-sm-10">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Anzahl</th>
+                                <th>Einzelpreis</th>
+                                <th>Part</th>
+                                <th>
+                                    <button type="submit" name="addRowUpdate" th:text="Add">Add row</button>
+                                </th>
+                                <!--<th>Aktionen</th>-->
+                            </tr>
+                            <tr th:each="buy,rowStat : *{buys}">
+                                <td>
+                                    <input type="text" th:field="*{buys[__${rowStat.index}__].quantity}" th:errorclass="fieldError" />
+                                </td>
+
+                                <td>
+                                    <input type="text" th:field="*{buys[__${rowStat.index}__].price}" th:errorclass="fieldError" />
+                                </td>
+
+                                <td>
+                                    <select type="text" th:field="*{buys[__${rowStat.index}__].part}" th:errorclass="fieldError" >
+                                        <option th:each="part : ${partList}" th:value="${part.id}" th:text="${part.name}">Thymus Thymi</option>
+                                    </select>
+                                </td>
+                                <input type="hidden" th:field="*{buys[__${rowStat.index}__].bill.id}" />
+                                <input type="hidden" th:field="*{buys[__${rowStat.index}__].id}" />
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button type="submit" name="update" th:text="Save">Add</button>
+                </div>
+                <input th:type="hidden" th:field="*{id}">
+
+                <!--<input name="_method" type="hidden" value="PUT" />-->
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
